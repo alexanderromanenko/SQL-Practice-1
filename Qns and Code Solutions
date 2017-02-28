@@ -1,4 +1,4 @@
-Exercise 1
+ Exercise 1
 Show the biggest 3 countries on the least populous continent (except for Antarctica).
 (Comment: please don’t hardcode ‘Oceania’.)
                select continent,  name as country_name, population, 
