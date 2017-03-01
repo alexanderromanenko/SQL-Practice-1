@@ -63,16 +63,16 @@ For the 5 most populous countries, show the 3 most populous cites per country. O
                where ci.countrycode = co.code and ci.name=bc.name and co.name= bigco.name
                and bc.rank<=5 
 
-with co as (select name, code , rank() over(order by population desc)
-from country rank),
-ci as (select name, countrycode , rank() over(partition by countrycode order by population desc)
-from city rank)
-select co.name, ci.name,co.rank, ci.rank
-from co
-inner join ci
-ON co.code=ci.countrycode
-where ci.rank<=3 and co.rank <=5
-order by co.rank, ci.rank
+               with co as (select name, code , rank() over(order by population desc)
+               from country rank),
+               ci as (select name, countrycode , rank() over(partition by countrycode order by population desc)
+               from city rank)
+               select co.name, ci.name,co.rank, ci.rank
+               from co
+               inner join ci
+               ON co.code=ci.countrycode
+               where ci.rank<=3 and co.rank <=5
+               order by co.rank, ci.rank
 
 
 Exercise 6 
@@ -150,26 +150,26 @@ Create PostgreSQL tables that would be capable of storing this data. Present thi
                 create table customers (
                 cust_id integer PRIMARY KEY,
                 first_name text NOT NULL,
-    last_name text NOT NULL,
-  email_add text NOT NULL)
+                last_name text NOT NULL,
+                email_add text NOT NULL)
 
-  create table cust_payments (
-  tour_id integer primary key,
-  cust_id integer,
-  amount_paid integer,
-  outstanding_amount integer,
-  booking_date date,
-  foreign key (tour_id) REFERENCES tours(tour_id),
-  foreign key (cust_id) REFERENCES customers(cust_id))
+                create table cust_payments (
+                tour_id integer primary key,
+                cust_id integer,
+                amount_paid integer,
+                outstanding_amount integer,
+                booking_date date,
+                foreign key (tour_id) REFERENCES tours(tour_id),
+                foreign key (cust_id) REFERENCES customers(cust_id))
 
-  drop table languages;
-  drop table guides cascade;
-  drop table customers cascade;
-  drop table cust_payments cascade; 
-  drop table tours cascade;
+                drop table languages;
+                drop table guides cascade;
+                drop table customers cascade;
+                drop table cust_payments cascade; 
+                drop table tours cascade;
 
-  select * from languages;
-  select * from tours;
-  select * from guides;
-  select * from customers;
-  select * from cust_payments;
+                select * from languages;
+                select * from tours;
+                select * from guides;
+                select * from customers;
+                select * from cust_payments;
